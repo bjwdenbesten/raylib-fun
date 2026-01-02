@@ -2,10 +2,14 @@ CC=gcc
 CFLAGS=$(shell pkg-config --cflags raylib)
 LDFLAGS=$(shell pkg-config --libs raylib)
 
-TARGET=cuboid
+TARGETS=cuboid halfpong
 
-cuboid:
-	$(CC) cuboid.c $(CFLAGS) $(LDFLAGS) -o cuboid
+.PHONY: all clean	
+
+all: $(TARGETS)
+
+%: %.c
+	$(CC) $< $(CFLAGS) $(LDFLAGS) -o $@
 
 clean:
-	rm -f $(TARGET)
+	rm -f $(TARGETS)
